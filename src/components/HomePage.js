@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+class HomePage extends React.Component{
 
-const HomePage = () => {
+render(){
+
   return (
     <div>
       <img src="https://047f018102c8c8f717a6-1efb167bc857a9871c34d9fa1ea1cbde.ssl.cf1.rackcdn.com/myevive_black.png" />
@@ -11,5 +14,8 @@ const HomePage = () => {
     </div>
   );
 };
-
-export default HomePage;
+}
+const mapStateToProps = (state) =>{
+  return {...state.movies};
+}
+export default connect(mapStateToProps)(HomePage);
