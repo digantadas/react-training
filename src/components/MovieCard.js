@@ -1,29 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {PropTypes} from 'prop-types'
-import {changeRatings} from '../actions/moviesActions.js'
-const  generateRatings = (rating) => {
-    const arr = ['star','star','star','star','star']
-    return arr.map((star,index)=>{
-      if(index <= rating -1){
-        return 'star-filled'
-      }else{
-        return 'star'
-      }
-    })
-  }
+import {moviesAction} from '../actions/moviesActions.js'
 
 
 class MovieCard extends React.Component{
 
 
   handleRatings = (ratings,id) =>{
-    this.props.dispatch(changeRatings({ratings,id}))
+    this.props.dispatch(moviesAction.changeRatings({ratings,id}))
   }
 
   render(){
-    const data = this.props.own.data
-    const ratingsArr = generateRatings(parseInt(data.ratings))
+
+    const {data,ratingsArr} = this.props
     console.log("render")
     return(
     <div className='movie-tile'>
@@ -47,7 +37,17 @@ class MovieCard extends React.Component{
   }
 
 const matchStateToProps = (state,own) => {
-  return {own}
+  console.log(state)
+  let arr = ['star','star','star','star','star']
+  const rating = own.data.ratings
+  arr = arr.map((star,index)=>{
+    if(index <= rating -1){
+      return 'star-filled'
+    }else{
+      return 'star'
+    }
+  })
+  return {...own,ratingsArr:arr}
 }
 
 

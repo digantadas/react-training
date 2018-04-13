@@ -1,4 +1,4 @@
-import {CHANGE_RATINGS,MOVIES_INIT} from '../constants/actionTypes.js'
+import {moviesActionType} from '../constants/actionTypes.js'
 
 const initState = {
   byId:{
@@ -10,17 +10,18 @@ const initState = {
 
 const movies = (state=initState,action)  =>{
   switch(action.type){
-    case MOVIES_INIT:
+    case moviesActionType.MOVIES_INIT:
     return {...action.payload}
 
-    case CHANGE_RATINGS:
+    case moviesActionType.CHANGE_RATINGS:
+    console.log(action)
     return {
       ...state,
       byId:{
         ...state.byId,
-        [action.id]:{
-          ...state.byId[action.id],
-          ratings: action.ratings
+        [action.payload.id]:{
+          ...state.byId[action.payload.id],
+          ratings: action.payload.ratings
         }
       }
     }

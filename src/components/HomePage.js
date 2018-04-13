@@ -1,21 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {moviesAPI} from '../actions/moviesActions.js'
+import {moviesAction}from '../actions/moviesActions.js'
 import { connect } from 'react-redux'
 import MovieCard from './MovieCard.js'
 class HomePage extends React.Component{
 
 componentDidMount(){
-  this.props.dispatch(moviesAPI())
+  this.props.dispatch(moviesAction.moviesAPI())
 }
 
-shouldComponentUpdate(nextProp,nextState){
-  console.log(nextState)
-  return true;
-}
 
 render(){
-const moviesArray = this.props.allMovies
+  let moviesArray = []
+moviesArray = this.props.allMovies
 const moviesObj = this.props.byId
   return (
     <div>
@@ -25,7 +22,8 @@ const moviesObj = this.props.byId
       <div className="movies-container">
         {moviesArray.map((movie)=>{
           return <MovieCard key={movie} data={moviesObj[movie]} />
-        })}
+        })
+      }
       </div>
       <Link to="/my-project">My Project</Link>
     </div>
